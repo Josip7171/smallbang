@@ -1,0 +1,89 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card">
+      <img src="./static/mrkva33.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Mrkva</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col-8">
+              <a href="{{ url_for('product') }}" class="btn btn-primary">Detalji</a>
+            </div>
+            <div class="col-4">
+              <strong>3.99€</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="./static/cikla.jpg" class="card-img-top" alt="..">
+      <div class="card-body">
+        <h5 class="card-title">Cikla</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col-8">
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="col-4">
+              <strong>7.99€</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="./static/kupus.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Kupus</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col-8">
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="col-4">
+              <strong>5.99€</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="./static/mrkva33.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col-8">
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="col-4">
+              <strong>2.99€</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
+

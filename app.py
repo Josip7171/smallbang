@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, url_for
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -11,14 +11,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'your_secret_key'  # Secret key for session management
 db = SQLAlchemy(app)
 
+
 # Define the Subscriber model
 class Subscriber(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
 
+
 # Create all tables in the database within the application context
 with app.app_context():
     db.create_all()
+
 
 def send_email(recipient_email, message_text):
     sender_email = "crogreens1@gmail.com"
@@ -75,9 +78,63 @@ def confirmation():
     return render_template('home.html', success=success, already_joined=already_joined, error=error)
 
 
+@app.route('/post/1')
+def post():
+    return render_template('post1.html')
+
+
+@app.route('/product/microgreens/1')
+def product():
+    return render_template('product1.html')
+
+
+@app.route('/calculator')
+def calculator():
+    return render_template('calculator.html')
+
+
+
+@app.route('/plan')
+def about():
+    return render_template('plan.html')
+
+
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+
+@app.route('/microgreens')
+def microgreens():
+    return render_template('microgreens.html')
+
+
+@app.route('/spices')
+def spices():
+    return render_template('spices.html')
+
+
+@app.route('/veggies')
+def veggies():
+    return render_template('veggies.html')
+
+
+@app.route('/meat')
+def meat():
+    return render_template('meat.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
 @app.route('/')
-def hello():
+def home():
     return render_template('home.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+

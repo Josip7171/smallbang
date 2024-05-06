@@ -4,30 +4,30 @@
 
 <div class="container mt-4">
     <div class="list-group">
-      <a href="{{ url_for('post') }}" class="list-group-item list-group-item-action" aria-current="true">
+      <a href="{{ url_for('post', post_id=3) }}" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">List group item heading</h5>
-          <small>3 days ago</small>
+          <h5 class="mb-1">Priroda i povezanost</h5>
+          <small>20.04.2024</small>
         </div>
-        <p class="mb-1">Some placeholder content in a paragraph.</p>
-        <small>And some small print.</small>
+        <p class="mb-1">Da li je dovoljno ako samo gledam svoja posla i radim sve kako treba u svojem vrtu.</p>
+        <small>Ili to možda nije dovoljno.</small>
       </a>
-      <a href="#" class="list-group-item list-group-item-action">
+      <a href="{{ url_for('post', post_id=2) }}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">List group item heading</h5>
-          <small class="text-body-secondary">3 days ago</small>
+            <h5 class="mb-1">Priroda i znanje</h5>
+            <small class="text-body-secondary">20.04.2024</small>
         </div>
-        <p class="mb-1">Some placeholder content in a paragraph.</p>
-        <small class="text-body-secondary">And some muted small print.</small>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">
+        <p class="mb-1">Da li je dovoljno samo "željeti" ili je potrebno i znanje.</p>
+        <small class="text-body-secondary">I od kuda nam to znanje.</small>
+    </a>
+    <a href="{{ url_for('post', post_id=1) }}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">List group item heading</h5>
-          <small class="text-body-secondary">3 days ago</small>
+            <h5 class="mb-1">Priroda i strpljivost</h5>
+            <small class="text-body-secondary">20.04.2024</small>
         </div>
-        <p class="mb-1">Some placeholder content in a paragraph.</p>
-        <small class="text-body-secondary">And some muted small print.</small>
-      </a>
+        <p class="mb-1">Zašto je strpljivost od ključne važnosti.</p>
+        <small class="text-body-secondary">I kako se strpljivost odražava na sve što radimo.</small>
+    </a>
     </div>
 </div>
 

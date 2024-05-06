@@ -1,7 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from flask import Flask, redirect, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
@@ -16,32 +13,12 @@ db = SQLAlchemy(app)
 class Subscriber(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    message = db.Column(db.Text, nullable=False)
 
 
 # Create all tables in the database within the application context
 with app.app_context():
     db.create_all()
-
-
-def send_email(recipient_email, message_text):
-    sender_email = "crogreens1@gmail.com"
-    receiver_email = "crogreens1@gmail.com"
-    app_password = "bvqu pewm uryj fsgh"
-
-    email_message = MIMEMultipart()
-    email_message['From'] = sender_email
-    email_message['To'] = receiver_email
-    email_message['Subject'] = "New Join"
-
-    body = message_text + '\n\n' + recipient_email
-    email_message.attach(MIMEText(body, 'plain'))
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(sender_email, app_password)
-    text = email_message.as_string()
-    server.sendmail(sender_email, receiver_email, text)
-    server.quit()
 
 
 @app.route('/send_email', methods=['POST'])
@@ -57,11 +34,10 @@ def send_email_route():
             return redirect('/confirmation')
 
         # If email doesn't exist, add it to the database
-        new_subscriber = Subscriber(email=recipient_email)
+        new_subscriber = Subscriber(email=recipient_email, message=message_text)
         try:
             db.session.add(new_subscriber)
             db.session.commit()
-            send_email(recipient_email, message_text)
             session['success'] = True
             return redirect('/confirmation')
         except IntegrityError:
@@ -78,14 +54,43 @@ def confirmation():
     return render_template('home.html', success=success, already_joined=already_joined, error=error)
 
 
-@app.route('/post/1')
-def post():
-    return render_template('post1.html')
+# Define a dynamic route that accepts a post_id parameter
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    template_name = f'post{post_id}.html'
+    # You can add logic here to fetch the post content based on post_id
+    if post_id == 1:
+        post_title = "Lekcije Iz Prirode II. Dio"
+        post_date = "3 days ago"
+        post_content = "Some placeholder content in a paragraph."
+        post_additional_info = "And some muted small print."
+    elif post_id == 2:
+        post_title = "Priroda i strpljivost"
+        post_date = "20.04.2024"
+        post_content = "Zašto je strpljivost od ključne važnosti."
+        post_additional_info = "I kako se strpljivost odražava na sve što radimo."
+    elif post_id == 3:
+        post_title = "Priroda i strpljivost"
+        post_date = "20.04.2024"
+        post_content = "Zašto je strpljivost od ključne važnosti."
+        post_additional_info = "I kako se strpljivost odražava na sve što radimo."
+    else:
+        # Handle cases for other post IDs
+        # For simplicity, let's just return a default message
+        return "Post not found"
+
+    # Render the template with the dynamic post content
+    return render_template(template_name, title=post_title, date=post_date, content=post_content, additional_info=post_additional_info)
 
 
-@app.route('/product/microgreens/1')
-def product():
-    return render_template('product1.html')
+# Define a dynamic route that accepts a product_id parameter
+@app.route('/product/microgreens/<int:product_id>')
+def product(product_id):
+    # Construct the template name based on the product_id
+    template_name = f'product{product_id}.html'
+
+    # Render the template with the dynamic product content
+    return render_template(template_name)
 
 
 @app.route('/calculator')
@@ -93,11 +98,9 @@ def calculator():
     return render_template('calculator.html')
 
 
-
 @app.route('/plan')
 def about():
     return render_template('plan.html')
-
 
 
 @app.route('/blog')
@@ -137,4 +140,3 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
